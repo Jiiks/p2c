@@ -1,1 +1,31 @@
-<html>a</html>
+<html>
+  <head>
+    <style>
+        html,body{ margin: 0; padding: 0; background: #303030; }
+        div.container { display: grid; place-items: center; height: 100%; width: 100%;}
+        h1 { font-size: 10vh; color: #AEAEAE; margin: 0; text-align:center; }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+        <div>
+            <h1>PoE2 Release in:</h1>
+            <h1 id="timer"/>
+        </div>
+    </div>
+  </body>
+  
+  <script>
+    (() => {
+        const timer = document.getElementById('timer');
+        const dateFuture = new Date('2024-12-06T19:00:00Z');
+        setInterval(() => {
+            const dateNow = new Date();
+            timer.innerText = `${(dateFuture - dateNow).toLocaleString()}ms`
+      }, 1);
+})();
+      
+  </script>
+  
+</html>
