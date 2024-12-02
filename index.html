@@ -4,13 +4,15 @@
         html,body{ margin: 0; padding: 0; background: #303030; }
         div.container { display: grid; place-items: center; height: 100%; width: 100%;}
         h1 { font-size: 10vh; color: #AEAEAE; margin: 0; text-align:center; }
+        h1.hidden { display: none; }
     </style>
   </head>
 
   <body>
     <div class="container">
         <div>
-            <h1>PoE2 Release in:</h1>
+            <h1 id="h">PoE2 EA in:</h1>
+            <h1 id="hh" class="hidden">PoE2 EA is out!</h1>
             <h1 id="timer"/>
         </div>
     </div>
@@ -20,9 +22,22 @@
     (() => {
         const timer = document.getElementById('timer');
         const dateFuture = new Date('2024-12-06T19:00:00Z');
-        setInterval(() => {
-            const dateNow = new Date();
+        let dateNow = new Date();
+        if(dateFuture - dateNow <= 0) {
+          timer.className = 'hidden';
+          document.getElementById('h').className = 'hidden';
+          document.getElementById('hh').className = '';
+          return;
+        }
+        const cdi = setInterval(() => {
+            dateNow = new Date();
             timer.innerText = `${(dateFuture - dateNow).toLocaleString()}ms`
+            if(dateFuture - dateNow <= 0) {
+              timer.className = 'hidden';
+              document.getElementById('h').className = 'hidden';
+              document.getElementById('hh').className = '';
+              clearInterval(cdi);
+            }
       }, 1);
 })();
       
